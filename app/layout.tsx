@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   title: "Quize",
   description:
     "Explore a wide range of quizzes across finance, technology, IT, and more.",
+  other: {
+    'google-adsense-account': 'ca-pub-5504771682915102',
+  },
 };
 
 export default function RootLayout({
@@ -28,6 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <meta name="google-adsense-account" content="ca-pub-5504771682915102" />
+      </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <LayoutWrapper>
           {children}
