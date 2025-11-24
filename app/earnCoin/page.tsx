@@ -48,7 +48,7 @@ const EarnCoinContent = () => {
         >
           <div className="flex justify-center w-full">
             <GoogleAd 
-              adSlot="YOUR_EARN_COIN_AD_SLOT"
+              adSlot="1011987899"
               className="w-full"
               style={{ minHeight: '90px' }}
             />

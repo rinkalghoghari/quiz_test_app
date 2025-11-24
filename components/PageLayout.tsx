@@ -13,7 +13,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sticky top-4">
           <div className="flex justify-center">
             <GoogleAd 
-              adSlot="YOUR_LEFT_SIDEBAR_AD_SLOT"
+              adSlot="6950586571"
               className="w-full"
               style={{ minHeight: '250px' }}
             />
@@ -25,7 +25,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children }) => {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sticky top-4">
           <div className="flex justify-center">
             <GoogleAd 
-              adSlot="YOUR_RIGHT_SIDEBAR_AD_SLOT"
+              adSlot="3578317778"
               className="w-full"
               style={{ minHeight: '250px' }}
             />

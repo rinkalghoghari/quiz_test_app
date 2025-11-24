@@ -116,14 +116,14 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
-        data-ad-client="ca-pub-YOUR_PUBLISH ER_ID"
+        data-ad-client="ca-pub-5504771682915102"
         data-ad-slot={adSlot}
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
-      <script>
+      {/* <script>
         (window.adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+      </script> */}
     </div>
   );
 };

@@ -434,7 +434,7 @@ function QuizPageContent() {
         <div className="my-6 w-full max-w-[500px] mx-auto">
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
             <GoogleAd
-              adSlot="YOUR_QUIZ_RULES_TOP_AD_SLOT"
+              adSlot="7170202137"
               className="w-full"
               style={{ minHeight: "90px" }}
             />
@@ -447,7 +447,7 @@ function QuizPageContent() {
         <div className="my-6 w-full max-w-[500px] mx-auto">
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
             <GoogleAd
-              adSlot="YOUR_QUIZ_RULES_BOTTOM_AD_SLOT"
+              adSlot="4324423230"
               className="w-full"
               style={{ minHeight: "90px" }}
             />
@@ -635,7 +635,7 @@ const QuizPage = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sticky top-4">
             <div className="flex justify-center">
               <GoogleAd
-                adSlot="YOUR_LEFT_SIDEBAR_AD_SLOT"
+                adSlot="4759661214"
                 className="w-full"
                 style={{ minHeight: '250px' }}
               />
@@ -647,7 +647,7 @@ const QuizPage = () => {
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 sticky top-4">
             <div className="flex justify-center">
               <GoogleAd
-                adSlot="YOUR_RIGHT_SIDEBAR_AD_SLOT"
+                adSlot="1279565299"
                 className="w-full"
                 style={{ minHeight: '250px' }}
               />

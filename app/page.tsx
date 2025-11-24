@@ -83,7 +83,7 @@ const Page = () => {
     return classes.join(' ');
   };
 
-  
+
 
   return (
     <PageLayout>
@@ -96,7 +96,7 @@ const Page = () => {
         >
           <div className="flex justify-center w-full">
             <GoogleAd 
-              adSlot="YOUR_QUIZ_TOP_AD_SLOT"
+              adSlot="6012909426"
               className="w-full"
               style={{ minHeight: '90px' }}
             />
@@ -225,7 +225,7 @@ const Page = () => {
         >
           <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
             <GoogleAd 
-              adSlot="YOUR_MAIN_QUIZ_AD_SLOT"
+              adSlot="9085919030"
               className="w-full"
               style={{ minHeight: '250px' }}
             />
