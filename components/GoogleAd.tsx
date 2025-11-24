@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { getRemoteConfigValue } from '@/lib/firebaseConfig';
 
 declare global {
@@ -7,27 +7,13 @@ declare global {
   }
 }
 
-// Define the props interface for type safety
 interface GoogleAdProps {
-  // The ad slot ID from Google AdSense
   adSlot?: string;
-  // Optional custom class name for styling
   className?: string;
-  // Optional style object for inline styling
   style?: React.CSSProperties;
 }
 
-/**
- * GoogleAd Component
- * A reusable component for displaying Google AdSense advertisements
- * 
- * Features:
- * - Responsive ad container
- * - Error handling for ad loading
- * - TypeScript support
- * - Customizable through props
- */
-const GoogleAd: React.FC<GoogleAdProps> = ({ 
+const GoogleAd: React.FC<GoogleAdProps> = ({
   adSlot: propAdSlot = '',
   className = '',
   style = {}
@@ -35,40 +21,44 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
   const [adSlot, setAdSlot] = useState(propAdSlot);
   const [adEnabled, setAdEnabled] = useState<boolean | null>(null);
 
+  // ⭐ FIX 1: ref for <ins>
+  const adRef = useRef<HTMLModElement | null>(null);
+
   useEffect(() => {
-    // Only run on client-side
     if (typeof window === 'undefined') return;
 
-    // Check GDPR consent
     const gdprConsent = localStorage.getItem('gdpr-consent');
     if (gdprConsent === 'false') {
       setAdEnabled(false);
       return;
     }
 
-    // Get ad slot from Remote Config if not provided as prop
     if (!propAdSlot) {
       const remoteAdSlot = getRemoteConfigValue('slotId');
       if (remoteAdSlot) {
-        console.log('Remote ad slot:', remoteAdSlot);
         setAdSlot(remoteAdSlot);
       }
     }
 
-    // Check if ads are enabled in Remote Config
-    const isAdEnabled = gdprConsent === 'true' && getRemoteConfigValue('google_ad_enabled') !== 'false';
+    const isAdEnabled = gdprConsent === 'true' &&
+      getRemoteConfigValue('google_ad_enabled') !== 'false';
+
     setAdEnabled(isAdEnabled);
   }, [propAdSlot]);
+
+  // ⭐ FIX 2: prevent multiple push() calls
   useEffect(() => {
     try {
-      // Initialize the adsbygoogle array if it doesn't exist
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      if (adRef.current && !adRef.current.getAttribute("data-loaded")) {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        adRef.current.setAttribute("data-loaded", "true");
+      }
     } catch (error) {
       console.error('AdSense error:', error);
     }
-  }, []); // Empty dependency array means this runs once on mount
+  }, [adSlot]);
 
-  // Demo styles - these will be shown in development
+
   const demoStyles: React.CSSProperties = {
     margin: '20px 0',
     textAlign: 'center',
@@ -82,19 +72,12 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
     justifyContent: 'center',
     flexDirection: 'column',
     color: '#6c757d',
-    ...style // Merge with any custom styles passed as props
+    ...style
   };
 
-  // Don't render anything if still loading or if ads are disabled
-  if (adEnabled === null) {
-    return null; // Or a loading state if you prefer
-  }
-  
-  if (!adEnabled) {
-    return null;
-  }
+  if (adEnabled === null) return null;
+  if (!adEnabled) return null;
 
-  // If no ad slot is set, show a warning
   if (!adSlot) {
     return (
       <div className={`google-ad ${className}`} style={demoStyles}>
@@ -107,13 +90,13 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
 
   return (
     <div className={`google-ad ${className}`} style={demoStyles}>
-      {/* Demo content - will be replaced with actual ad in production */}
       <div style={{ fontWeight: 'bold', marginBottom: '8px' }}>
         Advertisement - Slot: {adSlot}
       </div>
-      
-      {/* Actual AdSense Ad */}
+
+      {/* ⭐ FIX 3: added ref here */}
       <ins
+        ref={adRef}
         className="adsbygoogle"
         style={{ display: 'block' }}
         data-ad-client="ca-pub-5504771682915102"
@@ -121,9 +104,7 @@ const GoogleAd: React.FC<GoogleAdProps> = ({
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins>
-      {/* <script>
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      </script> */}
+
     </div>
   );
 };
